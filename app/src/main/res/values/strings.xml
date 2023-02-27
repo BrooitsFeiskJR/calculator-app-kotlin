@@ -17,4 +17,5 @@
     <string name="btnZero">0</string>
     <string name="clr">CLR</string>
     <string name="btnEqual">=</string>
+    <string name="btnDot">.</string>
 </resources>

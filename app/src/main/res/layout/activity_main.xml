@@ -166,9 +166,18 @@
             android:id="@+id/btnZero"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:onClick="onDigit"
             android:text="@string/btnZero"
+            tools:ignore="UsingOnClickInXml" />
+        <Button
+            android:layout_margin="2dp"
+            android:id="@+id/btnDot"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onDecimalPoint"
+            android:text="@string/btnDot"
             tools:ignore="UsingOnClickInXml" />
         <Button
             android:layout_margin="2dp"
