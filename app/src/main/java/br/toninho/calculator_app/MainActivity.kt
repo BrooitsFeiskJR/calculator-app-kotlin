@@ -55,4 +55,30 @@ class MainActivity : AppCompatActivity() {
                     value.contains("-")
         }
     }
+
+    fun onEqual(view: View) {
+        if(lastNumeric) {
+            var tvValue: String = tvInput?.text.toString()
+            var prefix = ""
+            try {
+                if (tvValue.startsWith("-")) {
+                    prefix = "-"
+                    tvValue = tvValue.substring(1)
+                }
+                if (tvValue.contains("-")) {
+                    val splitValue: List<String> = tvValue.split("-")
+                    var one = splitValue[0]
+                    var two = splitValue[1]
+
+                    if (prefix.isNotEmpty()) {
+                        one = prefix + one
+                    }
+                    tvInput?.text = (one.toDouble() - two.toDouble()).toString()
+                }
+
+            } catch (e: java.lang.ArithmeticException) {
+                e.printStackTrace()
+            }
+        }
+    }
 }
