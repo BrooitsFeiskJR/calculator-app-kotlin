@@ -45,17 +45,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isOperatorAdded(value: String) : Boolean {
-        return if (value.startsWith("-")) {
-            false
-        } else {
-            value.contains("/") ||
-                    value.contains("*") ||
-                    value.contains("+") ||
-                    value.contains("-")
-        }
-    }
-
     fun onEqual(view: View) {
         if(lastNumeric) {
             var tvValue: String = tvInput?.text.toString()
@@ -68,17 +57,62 @@ class MainActivity : AppCompatActivity() {
                 if (tvValue.contains("-")) {
                     val splitValue: List<String> = tvValue.split("-")
                     var one = splitValue[0]
-                    var two = splitValue[1]
+                    val two = splitValue[1]
 
                     if (prefix.isNotEmpty()) {
                         one = prefix + one
                     }
-                    tvInput?.text = (one.toDouble() - two.toDouble()).toString()
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() - two.toDouble()).toString())
+                } else  if (tvValue.contains("+")) {
+                    val splitValue: List<String> = tvValue.split("+")
+                    var one = splitValue[0]
+                    val two = splitValue[1]
+
+                    if (prefix.isNotEmpty()) {
+                        one = prefix + one
+                    }
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() + two.toDouble()).toString())
+                } else  if (tvValue.contains("/")) {
+                    val splitValue: List<String> = tvValue.split("/")
+                    var one = splitValue[0]
+                    val two = splitValue[1]
+
+                    if (prefix.isNotEmpty()) {
+                        one = prefix + one
+                    }
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() / two.toDouble()).toString())
+                } else  if (tvValue.contains("*")) {
+                    val splitValue: List<String> = tvValue.split("*")
+                    var one = splitValue[0]
+                    val two = splitValue[1]
+
+                    if (prefix.isNotEmpty()) {
+                        one = prefix + one
+                    }
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() * two.toDouble()).toString())
                 }
 
             } catch (e: java.lang.ArithmeticException) {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun isOperatorAdded(value: String) : Boolean {
+        return if (value.startsWith("-")) {
+            false
+        } else {
+            value.contains("/") ||
+                    value.contains("*") ||
+                    value.contains("+") ||
+                    value.contains("-")
+        }
+    }
+
+    private fun removeZeroAfterDot(result: String) : String {
+        var value = result
+        if (result.contains(".0"))
+            value = result.substring(0, result.length - 2)
+        return value
     }
 }
